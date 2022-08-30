@@ -1,11 +1,11 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { authOperations } from 'redux/auth/auth-operations';
+// import { authOperations } from 'redux/auth/auth-operations';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export default function Contacts() {
-  const [contacts, setContats] = useState();
+  // const [contacts, setContats] = useState();
 
   const dispatch = useDispatch();
   const getContacts = createAsyncThunk('', async () => {
@@ -17,10 +17,10 @@ export default function Contacts() {
     } catch (error) {}
   });
 
-  const xxx = dispatch(getContacts);
-  console.log(xxx);
+  // const xxx = dispatch(getContacts);
+  // console.log(xxx);
 
-  console.log(contacts);
+  // console.log(contacts);
 
   return (
     <div>
