@@ -36,19 +36,19 @@ const logOut = createAsyncThunk('auth/logout', async () => {
   } catch (error) {}
 });
 
-const getContacts = createAsyncThunk('auth/contacts', async () => {
-  try {
-    const { data } = await axios.get('/contacts');
-    console.log(data);
-    // token.unset();
-    return data;
-  } catch (error) {}
-});
+// const getContacts = createAsyncThunk('auth/contacts', async () => {
+//   try {
+//     const { data } = await axios.get('/contacts');
+//     console.log(data);
+//     // token.unset();
+//     return data;
+//   } catch (error) {}
+// });
 
 export const authOperations = {
   register: register,
   logIn: logIn,
   logOut: logOut,
   token: token,
-  getContacts: getContacts,
+  // getContacts: getContacts,
 };
