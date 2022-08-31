@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { contactsOperations } from 'redux/contacts/contacts-operations';
 import Filter from 'components/Filter/Filter';
+import Addcontact from 'components/Addcontact/Addcontacts';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function Contacts() {
 
   return (
     <div>
+      <Addcontact />
       <Filter />{' '}
       <ul>
         {contacts &&
