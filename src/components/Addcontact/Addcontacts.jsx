@@ -1,11 +1,23 @@
 import { contactsOperations } from 'redux/contacts/contacts-operations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Addcontact() {
+  const contacts = useSelector(state => state.contacts.contacts);
+
   const dispatch = useDispatch();
   const handleSubmit = e => {
     e.preventDefault();
     const target = e.target.elements;
+
+    const isInContacts = contacts.find(
+      contact => contact.name.toLowerCase() === target.name.value.toLowerCase()
+    );
+
+    if (isInContacts) {
+      alert(`${target.name.value} is already in contacts. Please try again`);
+
+      return;
+    }
 
     const formDatas = {
       name: target.name.value,
