@@ -13,15 +13,18 @@ const contactsSlice = createSlice({
     [contactsOperations.getContact.fulfilled](state, action) {
       console.log(action.payload);
 
-      //   action.payload.map(el => state.contacts.push(el));
       state.contacts = action.payload;
-
-      //   return { ...state, contacts: [...state.contacts, action.payload] };
-      //   state.contacts.push(action.payload);
-      //   state.contacts = [...state.contacts, action.payload];
     },
-    // addContact: (state, action) => {},
-    // deleteContact: (state, action) => {},
+    [contactsOperations.addContact.fulfilled]: (state, action) => {
+      return { ...state, contacts: [...state.contacts, action.payload] };
+    },
+    [contactsOperations.deleteContact.fulfilled]: (state, action) => {
+      const newContacts = state.contacts.filter(
+        item => item.id !== action.payload
+      );
+
+      return { ...state, contacts: newContacts };
+    },
     [contactsOperations.filter]: (state, action) => {
       state.filter = action.payload;
     },

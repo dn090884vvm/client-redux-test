@@ -36,6 +36,14 @@ export default function Contacts() {
             <li key={contact.id}>
               <p>{contact.name}</p>
               <p>{contact.number}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(contactsOperations.deleteContact(contact.id));
+                }}
+              >
+                Delete
+              </button>
             </li>
           ))}
       </ul>

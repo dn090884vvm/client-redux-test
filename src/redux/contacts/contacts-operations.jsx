@@ -13,10 +13,27 @@ const getContact = createAsyncThunk('contacts/getcontact', async () => {
   }
 });
 
-export const filter = createAction('phonebookReducer/filter');
+const addContact = createAsyncThunk('contacts/addcontact', async newcontact => {
+  const { data } = await axios.post('/contacts', newcontact);
+  //   console.log(data);
+  return data;
+});
+
+const deleteContact = createAsyncThunk(
+  'contacts/deletecontact',
+  async contactId => {
+    await axios.delete(`/contacts/${contactId}`);
+
+    return contactId;
+  }
+);
+
+export const filter = createAction('contacts/filter');
 
 export const contactsOperations = {
   getContact: getContact,
+  addContact: addContact,
+  deleteContact: deleteContact,
   filter: filter,
 };
 // const getContacts = () => async dispatch => {
