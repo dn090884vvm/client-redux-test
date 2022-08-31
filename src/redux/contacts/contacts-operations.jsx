@@ -2,6 +2,21 @@
 // import { useDispatch } from 'react-redux';
 // const dispatch = useDispatch();
 
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+const getContact = createAsyncThunk('contacts/getcontact', async () => {
+  try {
+    const { data } = await axios.get('/contacts');
+    console.log('this is data', data);
+
+    return data;
+  } catch (error) {}
+});
+
+export const contactsOperations = {
+  getContact: getContact,
+};
 // const getContacts = () => async dispatch => {
 //   dispatch(fetchContactsrequest());
 //   try {
