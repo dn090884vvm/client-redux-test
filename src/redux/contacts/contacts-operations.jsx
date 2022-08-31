@@ -1,21 +1,23 @@
-// import axios from 'axios';
-// import { useDispatch } from 'react-redux';
-// const dispatch = useDispatch();
-
 import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 
 const getContact = createAsyncThunk('contacts/getcontact', async () => {
   try {
     const { data } = await axios.get('/contacts');
-    console.log('this is data', data);
+    // console.log('this is data', data);
 
     return data;
-  } catch (error) {}
+  } catch (error) {
+    // console.log(error.response.request.response);
+    // alert(error.response.request.response);
+  }
 });
+
+export const filter = createAction('phonebookReducer/filter');
 
 export const contactsOperations = {
   getContact: getContact,
+  filter: filter,
 };
 // const getContacts = () => async dispatch => {
 //   dispatch(fetchContactsrequest());

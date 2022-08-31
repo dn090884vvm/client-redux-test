@@ -1,11 +1,8 @@
-// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-// import { authOperations } from 'redux/auth/auth-operations';
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import axios from 'axios';
 import { contactsOperations } from 'redux/contacts/contacts-operations';
+import Filter from 'components/Filter/Filter';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -15,13 +12,25 @@ export default function Contacts() {
   }, [dispatch]);
 
   const contacts = useSelector(state => state.contacts.contacts);
-  console.log('this is after pushing', contacts);
+  const filterWord = useSelector(state => state.contacts.filter);
+
+  const gettedContacts = contacts;
+
+  const getFilteredContacts = () => {
+    const normalizedFilter = filterWord.toLowerCase();
+
+    return gettedContacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+  // console.log('this is after pushing', contacts);
 
   return (
     <div>
+      <Filter />{' '}
       <ul>
         {contacts &&
-          contacts.map(contact => (
+          getFilteredContacts().map(contact => (
             <li key={contact.id}>
               <p>{contact.name}</p>
               <p>{contact.number}</p>
