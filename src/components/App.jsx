@@ -8,6 +8,14 @@ import Login from 'pages/login';
 import { Home } from 'pages/home';
 import Contacts from 'pages/contacts';
 import { authOperations } from 'redux/auth/auth-operations';
+import PrivateRoute from './Routes/PrivateRoute';
+import PublicRoute from './Routes/PublicRoute';
+
+// const MainBar = lazy(() => import('./MainBar/MainBar'));
+// const Home = lazy(() => import('../pages/home'));
+// const Contacts = lazy(() => import('../pages/contacts'));
+// const Register = lazy(() => import('../pages/register'));
+// const Login = lazy(() => import('../pages/login'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -20,9 +28,19 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<MainBar />}>
           <Route index element={<Home />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+
+          {/* <Route path="/contacts" element={<Contacts />} /> */}
+          <Route path="/register" restricted element={<PublicRoute />}>
+            <Route path="/register" element={<Register />} />
+          </Route>
+
+          <Route path="/login" restricted element={<PublicRoute />}>
+            <Route path="/login" element={<Login />} />
+          </Route>
+
+          <Route path="/contacts" element={<PrivateRoute />}>
+            <Route path="/contacts" element={<Contacts />} />
+          </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
